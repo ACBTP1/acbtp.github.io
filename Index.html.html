@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AC BTP – Conseil, Expertise & Maîtrise d'Ouvrage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy:       #09162B;
+  --blue:       #17356A;
+  --blue-mid:   #1C4BA0;
+  --blue-bright:#2563EB;
+  --blue-light: #DBEAFE;
+  --blue-pale:  #EFF6FF;
+  --gold:       #C9960F;
+  --gold-light: #FEF3C7;
+  --white:      #FFFFFF;
+  --gray-50:    #F8FAFC;
+  --gray-100:   #F1F5F9;
+  --gray-200:   #E2E8F0;
+  --gray-400:   #94A3B8;
+  --gray-600:   #475569;
+  --gray-800:   #1E293B;
+  --font-display:'Barlow Condensed', sans-serif;
+  --font-body:  'DM Sans', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); color: var(--gray-800); background: var(--white); overflow-x: hidden; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(9,22,43,0.96); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+.nav-inner { max-width: 1300px; margin: 0 auto; padding: 0 2rem; height: 68px; display: flex; align-items: center; justify-content: space-between; }
+.logo { font-family: var(--font-display); font-size: 1.9rem; font-weight: 800; letter-spacing: 0.06em; color: var(--white); text-decoration: none; }
+.logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+.nav-links a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; transition: color 0.2s; }
+.nav-links a:hover { color: var(--gold); }
+.nav-cta { background: var(--blue-bright); color: #fff !important; padding: 0.45rem 1.1rem; border-radius: 3px; }
+.nav-cta:hover { background: var(--blue-mid) !important; }
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; }
+.mobile-menu { display: none; position: fixed; top: 68px; left: 0; right: 0; bottom: 0; background: var(--navy); z-index: 999; padding: 2.5rem 2rem; flex-direction: column; }
+.mobile-menu.open { display: flex; }
+.mobile-menu a { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: rgba(255,255,255,0.75); text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid rgba(255,255,255,0.07); padding: 1.1rem 0; }
+.mobile-menu a:hover { color: var(--gold); }
+
+/* HERO */
+#accueil { min-height: 100vh; background: var(--navy); display: flex; align-items: center; position: relative; overflow: hidden; }
+.hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(37,99,235,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.07) 1px, transparent 1px); background-size: 64px 64px; }
+.hero-glow { position: absolute; top: -15%; right: -5%; width: 800px; height: 800px; background: radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 62%); pointer-events: none; }
+.hero-gold-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, var(--gold) 0%, var(--blue-bright) 60%, transparent 100%); }
+.hero-inner { max-width: 1300px; margin: 0 auto; padding: 0 2rem; padding-top: 68px; position: relative; z-index: 2; width: 100%; }
+.hero-chip { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(37,99,235,0.12); border: 1px solid rgba(37,99,235,0.3); color: #93C5FD; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.35rem 0.9rem; border-radius: 100px; margin-bottom: 2rem; }
+.hero-chip::before { content: ''; width: 6px; height: 6px; background: #60A5FA; border-radius: 50%; }
+.hero-title { font-family: var(--font-display); font-size: clamp(3.5rem, 7.5vw, 7rem); font-weight: 800; line-height: 0.93; color: var(--white); letter-spacing: -0.01em; margin-bottom: 1.75rem; }
+.hero-title .line-gold { color: var(--gold); display: block; }
+.hero-title .line-dim { color: rgba(255,255,255,0.32); display: block; font-weight: 600; }
+.hero-sub { font-size: 1.05rem; color: rgba(255,255,255,0.55); max-width: 500px; line-height: 1.8; font-weight: 300; margin-bottom: 2.5rem; }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn { display: inline-block; padding: 0.85rem 1.9rem; border-radius: 3px; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: all 0.2s; letter-spacing: 0.02em; }
+.btn-primary { background: var(--blue-bright); color: #fff; }
+.btn-primary:hover { background: var(--blue-mid); transform: translateY(-1px); }
+.btn-ghost { border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.8); }
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+.hero-pills { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.07); }
+.hero-pill { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 0.78rem; padding: 0.4rem 1rem; border-radius: 100px; letter-spacing: 0.04em; }
+
+/* SECTIONS */
+section { scroll-margin-top: 68px; }
+.wrap { max-width: 1300px; margin: 0 auto; padding: 6rem 2rem; }
+.s-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue-bright); margin-bottom: 0.6rem; }
+.s-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 700; line-height: 1.05; color: var(--navy); margin-bottom: 1.1rem; }
+.s-title .g { color: var(--gold); }
+.s-intro { font-size: 1rem; color: var(--gray-600); max-width: 580px; line-height: 1.8; font-weight: 300; }
+
+/* À PROPOS */
+#a-propos { background: var(--white); }
+.apropos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 3rem; }
+.apropos-text p { font-size: 0.9625rem; color: var(--gray-600); line-height: 1.85; font-weight: 300; margin-bottom: 1.25rem; }
+.apropos-text p:last-child { margin-bottom: 0; }
+.apropos-text strong { color: var(--navy); font-weight: 500; }
+.apropos-visual-block { background: var(--navy); border-radius: 2px; padding: 3rem; position: relative; overflow: hidden; }
+.apropos-visual-block::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(37,99,235,0.09) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.09) 1px, transparent 1px); background-size: 40px 40px; }
+.apropos-visual-block::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--blue-bright)); }
+.av-inner { position: relative; z-index: 2; }
+.av-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold); font-weight: 700; margin-bottom: 1.25rem; }
+.av-quote { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--white); line-height: 1.25; margin-bottom: 2rem; }
+.av-items { display: flex; flex-direction: column; gap: 1.1rem; }
+.av-item { display: flex; gap: 0.9rem; align-items: flex-start; }
+.av-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; margin-top: 0.55rem; flex-shrink: 0; }
+.av-text { font-size: 0.875rem; color: rgba(255,255,255,0.5); font-weight: 300; line-height: 1.65; }
+.av-text strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+
+/* PÔLES */
+#nos-poles { background: var(--gray-50); }
+.poles-intro-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; margin-bottom: 4rem; flex-wrap: wrap; }
+.pole-soon-note { font-size: 0.8rem; color: var(--gray-400); font-style: italic; max-width: 260px; line-height: 1.6; text-align: right; }
+.poles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5px; background: var(--gray-200); border: 1.5px solid var(--gray-200); overflow: hidden; }
+.pole-card { background: var(--white); position: relative; }
+.pole-card.coming { background: var(--gray-50); opacity: 0.65; }
+.pole-header { padding: 2.25rem 2.25rem 0; }
+.pole-badge { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.3rem 0.75rem; border-radius: 100px; margin-bottom: 1.25rem; }
+.pole-badge.active { background: var(--blue-light); color: var(--blue-mid); }
+.pole-badge.soon { background: var(--gray-100); color: var(--gray-400); }
+.pole-icon { width: 52px; height: 52px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
+.pole-icon.qshe { background: #EFF6FF; }
+.pole-icon.amo  { background: #ECFDF5; }
+.pole-icon.future { background: var(--gray-100); }
+.pole-icon svg { width: 26px; height: 26px; fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+.pole-icon.qshe svg { stroke: #2563EB; }
+.pole-icon.amo  svg { stroke: #059669; }
+.pole-icon.future svg { stroke: var(--gray-400); }
+.pole-name { font-family: var(--font-display); font-size: 1.45rem; font-weight: 700; color: var(--navy); line-height: 1.15; margin-bottom: 0.75rem; }
+.pole-desc { font-size: 0.875rem; color: var(--gray-600); line-height: 1.75; font-weight: 300; padding: 0 2.25rem; }
+.pole-services { padding: 1.75rem 2.25rem 2.25rem; }
+.pole-services-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 1rem; }
+.service-list { display: flex; flex-direction: column; gap: 0.625rem; }
+.service-item { display: flex; gap: 0.75rem; align-items: flex-start; font-size: 0.875rem; color: var(--gray-600); font-weight: 300; line-height: 1.55; }
+.service-item::before { content: '→'; color: var(--blue-bright); font-size: 0.8rem; margin-top: 0.1rem; flex-shrink: 0; }
+.pole-card.coming .service-item::before { color: var(--gray-400); }
+.pole-divider { height: 1px; background: var(--gray-100); margin: 0 2.25rem; }
+.pole-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--blue-bright); transform: scaleY(0); transform-origin: top; transition: transform 0.3s ease; }
+.pole-card.amo-card::before { background: #059669; }
+.pole-card:not(.coming):hover::before { transform: scaleY(1); }
+
+/* RÉALISATIONS */
+#nos-realisations { background: var(--navy); }
+.realisations-empty { margin-top: 4rem; background: rgba(255,255,255,0.03); border: 1px dashed rgba(255,255,255,0.12); border-radius: 4px; padding: 4rem 2rem; text-align: center; }
+.real-icon { font-size: 2.5rem; margin-bottom: 1.25rem; opacity: 0.3; }
+.realisations-empty h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: rgba(255,255,255,0.45); margin-bottom: 0.75rem; }
+.realisations-empty p { font-size: 0.9rem; color: rgba(255,255,255,0.3); font-weight: 300; line-height: 1.7; max-width: 420px; margin: 0 auto 1.75rem; }
+
+/* ENGAGEMENTS */
+#nos-engagements { background: var(--white); }
+.engagements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2px; background: var(--gray-200); border: 2px solid var(--gray-200); margin-top: 4rem; overflow: hidden; }
+.engagement-card { background: var(--white); padding: 2.25rem 2rem; transition: background 0.2s; }
+.engagement-card:hover { background: var(--blue-pale); }
+.eng-num { font-family: var(--font-display); font-size: 3.5rem; font-weight: 800; color: var(--gray-100); line-height: 1; margin-bottom: 1rem; }
+.eng-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 0.625rem; }
+.eng-desc { font-size: 0.875rem; color: var(--gray-600); line-height: 1.7; font-weight: 300; }
+
+/* NOUS REJOINDRE */
+#nous-rejoindre { background: var(--gray-50); }
+.rejoindre-layout { display: grid; grid-template-columns: 1fr 1.15fr; gap: 5rem; align-items: start; }
+.rejoindre-text { margin-top: 3rem; }
+.rejoindre-text p { font-size: 0.9625rem; color: var(--gray-600); line-height: 1.85; font-weight: 300; margin-bottom: 1.25rem; }
+.rejoindre-cta-block { background: var(--navy); border-radius: 2px; padding: 2.75rem; margin-top: 3rem; position: relative; overflow: hidden; }
+.rejoindre-cta-block::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--blue-bright)); }
+.rcb-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold); font-weight: 700; margin-bottom: 0.75rem; }
+.rcb-title { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--white); margin-bottom: 1rem; line-height: 1.2; }
+.rcb-text { font-size: 0.875rem; color: rgba(255,255,255,0.5); font-weight: 300; line-height: 1.7; margin-bottom: 1.75rem; }
+.offres-list { display: flex; flex-direction: column; gap: 0.875rem; }
+.offre-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-left: 3px solid var(--blue-bright); padding: 1.25rem 1.5rem; border-radius: 0 3px 3px 0; }
+.offre-item-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.375rem; }
+.offre-name { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+.offre-tag { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; background: rgba(37,99,235,0.2); color: #93C5FD; padding: 0.2rem 0.6rem; border-radius: 100px; font-weight: 600; }
+.offre-desc { font-size: 0.825rem; color: rgba(255,255,255,0.38); font-weight: 300; line-height: 1.6; }
+.candidature-libre { background: rgba(201,150,15,0.08); border: 1px dashed rgba(201,150,15,0.3); border-radius: 3px; padding: 1.25rem 1.5rem; margin-top: 0.75rem; font-size: 0.875rem; color: rgba(255,255,255,0.5); font-weight: 300; line-height: 1.65; }
+.candidature-libre strong { color: var(--gold); font-weight: 500; }
+
+/* CONTACT */
+#contact { background: var(--white); }
+.contact-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start; }
+.contact-infos { display: flex; flex-direction: column; gap: 1.75rem; margin-top: 2.5rem; }
+.ci { display: flex; gap: 1.1rem; align-items: flex-start; }
+.ci-icon { width: 42px; height: 42px; background: var(--blue-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ci-icon svg { width: 18px; height: 18px; stroke: var(--blue-bright); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ci-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-400); font-weight: 600; margin-bottom: 0.2rem; }
+.ci-val { font-size: 0.9375rem; color: var(--navy); font-weight: 500; }
+.ci-placeholder { color: var(--gray-400); font-style: italic; font-weight: 300; font-size: 0.875rem; }
+.contact-form-wrap { background: var(--gray-50); padding: 2.5rem; border-radius: 2px; border: 1px solid var(--gray-200); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.fg { margin-bottom: 1.1rem; }
+.fg label { display: block; font-size: 0.75rem; font-weight: 600; color: var(--gray-600); margin-bottom: 0.45rem; text-transform: uppercase; letter-spacing: 0.07em; }
+.fg input, .fg textarea, .fg select { width: 100%; background: var(--white); border: 1px solid var(--gray-200); border-radius: 3px; padding: 0.7rem 0.9rem; font-size: 0.9rem; font-family: var(--font-body); color: var(--gray-800); outline: none; transition: border-color 0.2s; }
+.fg input:focus, .fg textarea:focus, .fg select:focus { border-color: var(--blue-bright); }
+.fg textarea { min-height: 110px; resize: vertical; }
+.btn-submit { width: 100%; background: var(--navy); color: #fff; border: none; padding: 0.95rem; font-size: 0.9rem; font-weight: 500; font-family: var(--font-body); border-radius: 3px; cursor: pointer; transition: background 0.2s; letter-spacing: 0.04em; }
+.btn-submit:hover { background: var(--blue); }
+.form-note { font-size: 0.775rem; color: var(--gray-400); margin-top: 0.875rem; text-align: center; font-weight: 300; }
+
+/* FOOTER */
+footer { background: var(--navy); padding: 2.75rem 2rem; border-top: 1px solid rgba(255,255,255,0.05); }
+.footer-inner { max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+.footer-logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: #fff; letter-spacing: 0.06em; }
+.footer-logo span { color: var(--gold); }
+.footer-links { display: flex; gap: 1.75rem; flex-wrap: wrap; }
+.footer-links a { font-size: 0.775rem; color: rgba(255,255,255,0.35); text-decoration: none; text-transform: uppercase; letter-spacing: 0.08em; transition: color 0.2s; }
+.footer-links a:hover { color: rgba(255,255,255,0.65); }
+.footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.2); }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from { opacity:0; transform: translateY(24px); } to { opacity:1; transform: translateY(0); } }
+.fu { animation: fadeUp 0.65s ease both; }
+.d1 { animation-delay: 0.12s; } .d2 { animation-delay: 0.24s; } .d3 { animation-delay: 0.38s; } .d4 { animation-delay: 0.52s; }
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .apropos-grid, .rejoindre-layout, .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .poles-grid { grid-template-columns: 1fr; }
+  .engagements-grid { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .poles-intro-row { flex-direction: column; }
+  .pole-soon-note { text-align: left; }
+}
+@media (max-width: 500px) {
+  .engagements-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#accueil" class="logo">AC<span>.</span>BTP</a>
+    <ul class="nav-links">
+      <li><a href="#a-propos">À propos</a></li>
+      <li><a href="#nos-poles">Nos Pôles</a></li>
+      <li><a href="#nos-realisations">Réalisations</a></li>
+      <li><a href="#nos-engagements">Engagements</a></li>
+      <li><a href="#nous-rejoindre">Nous rejoindre</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#a-propos" onclick="toggleMenu()">À propos</a>
+  <a href="#nos-poles" onclick="toggleMenu()">Nos Pôles</a>
+  <a href="#nos-realisations" onclick="toggleMenu()">Réalisations</a>
+  <a href="#nos-engagements" onclick="toggleMenu()">Engagements</a>
+  <a href="#nous-rejoindre" onclick="toggleMenu()">Nous rejoindre</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="accueil">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-gold-bar"></div>
+  <div class="hero-inner">
+    <div class="hero-chip fu">Structure en cours de création</div>
+    <h1 class="hero-title fu d1">
+      Expertise.<br>
+      <span class="line-gold">Conseil.</span>
+      <span class="line-dim">Performance.</span>
+    </h1>
+    <p class="hero-sub fu d2">
+      AC BTP vous accompagne dans vos projets de construction et d'aménagement avec une approche orientée qualité, sécurité et maîtrise des risques.
+    </p>
+    <div class="hero-actions fu d3">
+      <a href="#nos-poles" class="btn btn-primary">Découvrir nos pôles</a>
+      <a href="#contact" class="btn btn-ghost">Nous contacter</a>
+    </div>
+    <div class="hero-pills fu d4">
+      <span class="hero-pill">Qualité · Sécurité · Hygiène · Environnement</span>
+      <span class="hero-pill">Assistance à Maîtrise d'Ouvrage</span>
+      <span class="hero-pill">Île-de-France</span>
+    </div>
+  </div>
+</section>
+
+<!-- À PROPOS -->
+<section id="a-propos">
+  <div class="wrap">
+    <div class="apropos-grid">
+      <div>
+        <div class="s-label reveal">Qui sommes-nous</div>
+        <h2 class="s-title reveal">À propos <span class="g">d'AC BTP</span></h2>
+        <div class="apropos-text reveal">
+          <p>AC BTP est une structure spécialisée dans le <strong>conseil, l'assistance technique et l'accompagnement des acteurs du bâtiment et des travaux publics</strong>. Nous intervenons auprès des maîtres d'ouvrage, des entreprises et des collectivités pour garantir la réussite de leurs opérations.</p>
+          <p>Notre approche repose sur une <strong>expertise de terrain</strong> et une connaissance approfondie des réglementations en vigueur. Nous combinons rigueur technique, sens du service et proximité avec nos clients pour apporter des réponses concrètes à chaque enjeu.</p>
+          <p>Structurée autour de <strong>pôles d'expertise complémentaires</strong>, AC BTP est conçue pour grandir avec ses clients et s'adapter en permanence aux évolutions du secteur.</p>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="apropos-visual-block">
+          <div class="av-inner">
+            <div class="av-tag">Notre vision</div>
+            <div class="av-quote">"Mettre l'expertise au service de chaque projet, dès le premier jour."</div>
+            <div class="av-items">
+              <div class="av-item"><div class="av-dot"></div><div class="av-text"><strong>Rigueur</strong> — Chaque mission est menée avec méthode et précision, dans le respect des normes et délais.</div></div>
+              <div class="av-item"><div class="av-dot"></div><div class="av-text"><strong>Transparence</strong> — Nos clients sont informés à chaque étape, avec des rapports clairs et des recommandations actionnables.</div></div>
+              <div class="av-item"><div class="av-dot"></div><div class="av-text"><strong>Proximité</strong> — Une relation directe, sans intermédiaire, pour une réactivité maximale sur le terrain.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOS PÔLES -->
+<section id="nos-poles">
+  <div class="wrap">
+    <div class="poles-intro-row">
+      <div>
+        <div class="s-label reveal">Notre expertise</div>
+        <h2 class="s-title reveal">Nos <span class="g">Pôles</span></h2>
+        <p class="s-intro reveal">Des expertises structurées en pôles spécialisés pour répondre à l'ensemble de vos besoins.</p>
+      </div>
+      <div class="pole-soon-note reveal">D'autres pôles viendront compléter notre offre au fil du développement d'AC BTP.</div>
+    </div>
+    <div class="poles-grid">
+
+      <!-- PÔLE QSHE -->
+      <div class="pole-card reveal">
+        <div class="pole-header">
+          <div class="pole-badge active">Pôle actif</div>
+          <div class="pole-icon qshe">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="pole-name">Pôle Conseils QSHE</div>
+        </div>
+        <p class="pole-desc">Qualité, Sécurité, Hygiène, Environnement — nous accompagnons les entreprises du BTP dans la mise en place et le suivi de leur système de management QSHE, pour une performance durable et conforme aux exigences réglementaires.</p>
+        <div class="pole-divider"></div>
+        <div class="pole-services">
+          <div class="pole-services-title">Services proposés</div>
+          <div class="service-list">
+            <div class="service-item">Audit et diagnostic QSHE initial (état des lieux, identification des écarts)</div>
+            <div class="service-item">Élaboration et mise en œuvre du Plan de Prévention des Risques</div>
+            <div class="service-item">Rédaction du Document Unique d'Évaluation des Risques Professionnels (DUERP)</div>
+            <div class="service-item">Conseil et accompagnement à la certification ISO 9001, 14001, 45001</div>
+            <div class="service-item">Sensibilisation et formation des équipes aux bonnes pratiques QSHE</div>
+            <div class="service-item">Veille réglementaire et mise en conformité</div>
+            <div class="service-item">Gestion environnementale de chantier (déchets, nuisances, émissions)</div>
+            <div class="service-item">Suivi des indicateurs de performance et reporting QSHE</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PÔLE AMO -->
+      <div class="pole-card amo-card reveal">
+        <div class="pole-header">
+          <div class="pole-badge active">Pôle actif</div>
+          <div class="pole-icon amo">
+            <svg viewBox="0 0 24 24"><path d="M2 20h20M4 20V10l8-7 8 7v10M10 20v-5h4v5"/></svg>
+          </div>
+          <div class="pole-name">Pôle Assistance à Maîtrise d'Ouvrage</div>
+        </div>
+        <p class="pole-desc">Nous représentons et défendons les intérêts du maître d'ouvrage tout au long de son opération, de la phase programme jusqu'à la livraison, en assurant la coordination entre tous les intervenants.</p>
+        <div class="pole-divider"></div>
+        <div class="pole-services">
+          <div class="pole-services-title">Services proposés</div>
+          <div class="service-list">
+            <div class="service-item">Définition du programme et aide à la décision en phase amont</div>
+            <div class="service-item">Montage et suivi administratif, financier et juridique de l'opération</div>
+            <div class="service-item">Assistance à la consultation des entreprises (DCE, analyse des offres)</div>
+            <div class="service-item">Pilotage, coordination et suivi d'exécution des travaux (OPC)</div>
+            <div class="service-item">Contrôle du respect des délais, du budget et de la qualité</div>
+            <div class="service-item">Gestion des interfaces entre maîtrise d'œuvre, entreprises et MOA</div>
+            <div class="service-item">Assistance lors des opérations de réception et levée des réserves</div>
+            <div class="service-item">Gestion de la période de garantie de parfait achèvement (GPA)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PÔLES À VENIR -->
+      <div class="pole-card coming reveal">
+        <div class="pole-header">
+          <div class="pole-badge soon">À venir</div>
+          <div class="pole-icon future">
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+          </div>
+          <div class="pole-name">Prochains Pôles</div>
+        </div>
+        <p class="pole-desc">D'autres pôles sont en cours de structuration pour accompagner la croissance d'AC BTP et couvrir un spectre plus large de besoins dans le secteur du bâtiment et des travaux publics.</p>
+        <div class="pole-divider"></div>
+        <div class="pole-services">
+          <div class="pole-services-title">Domaines envisagés</div>
+          <div class="service-list">
+            <div class="service-item">Pôle Ingénierie & Études techniques</div>
+            <div class="service-item">Pôle Contrôle Technique & Expertise</div>
+            <div class="service-item">Pôle Formation professionnelle BTP</div>
+            <div class="service-item">Pôle Développement Durable & RSE</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- NOS RÉALISATIONS -->
+<section id="nos-realisations">
+  <div class="wrap">
+    <div class="s-label reveal" style="color:#60A5FA;">Nos références</div>
+    <h2 class="s-title reveal" style="color:var(--white);">Nos <span style="color:var(--gold);">Réalisations</span></h2>
+    <p class="s-intro reveal" style="color:rgba(255,255,255,0.42);">Nos premières missions sont en cours. Cette section sera enrichie au fil des projets réalisés.</p>
+    <div class="realisations-empty reveal">
+      <div class="real-icon">🏗️</div>
+      <h3>Bientôt disponible</h3>
+      <p>AC BTP est en phase de démarrage. Nos premières réalisations et références clients seront publiées ici dès la livraison des premières missions.</p>
+      <a href="#contact" class="btn btn-primary">Confier votre premier projet →</a>
+    </div>
+  </div>
+</section>
+
+<!-- NOS ENGAGEMENTS -->
+<section id="nos-engagements">
+  <div class="wrap">
+    <div class="s-label reveal">Ce qui nous guide</div>
+    <h2 class="s-title reveal">Nos <span class="g">Engagements</span></h2>
+    <p class="s-intro reveal">Des principes non négociables qui définissent notre façon de travailler et de nous engager auprès de chaque client.</p>
+    <div class="engagements-grid">
+      <div class="engagement-card reveal">
+        <div class="eng-num">01</div>
+        <div class="eng-title">Devis gratuit & transparent</div>
+        <p class="eng-desc">Chaque demande fait l'objet d'un devis détaillé, gratuit et sans engagement, avec une décomposition claire des prestations et honoraires.</p>
+      </div>
+      <div class="engagement-card reveal">
+        <div class="eng-num">02</div>
+        <div class="eng-title">Respect des délais</div>
+        <p class="eng-desc">Nos missions sont planifiées avec rigueur. Nous nous engageons sur des calendriers précis et informons nos clients de toute évolution.</p>
+      </div>
+      <div class="engagement-card reveal">
+        <div class="eng-num">03</div>
+        <div class="eng-title">Confidentialité absolue</div>
+        <p class="eng-desc">Toutes les informations partagées dans le cadre de nos missions sont traitées avec la plus stricte confidentialité. Un accord NDA est proposé sur demande.</p>
+      </div>
+      <div class="engagement-card reveal">
+        <div class="eng-num">04</div>
+        <div class="eng-title">Interlocuteur unique</div>
+        <p class="eng-desc">Un référent dédié suit votre dossier de bout en bout. Pas de dispersion, pas de perte d'information — une relation directe et efficace.</p>
+      </div>
+      <div class="engagement-card reveal">
+        <div class="eng-num">05</div>
+        <div class="eng-title">Indépendance & objectivité</div>
+        <p class="eng-desc">Nos conseils sont formulés dans votre seul intérêt. Nous n'avons aucun lien commercial avec les prestataires ou entreprises que nous évaluons.</p>
+      </div>
+      <div class="engagement-card reveal">
+        <div class="eng-num">06</div>
+        <div class="eng-title">Amélioration continue</div>
+        <p class="eng-desc">À l'issue de chaque mission, un bilan est réalisé. Vos retours nous permettent d'améliorer en permanence la qualité de nos prestations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOUS REJOINDRE -->
+<section id="nous-rejoindre">
+  <div class="wrap">
+    <div class="rejoindre-layout">
+      <div>
+        <div class="s-label reveal">Carrières</div>
+        <h2 class="s-title reveal">Nous <span class="g">rejoindre</span></h2>
+        <div class="rejoindre-text reveal">
+          <p>AC BTP se construit avec des professionnels passionnés qui partagent nos valeurs d'exigence et de service. Si vous êtes expert du BTP — consultant, ingénieur, technicien ou coordinateur — et que vous souhaitez évoluer dans une structure agile et ambitieuse, nous voulons vous rencontrer.</p>
+          <p>En rejoignant AC BTP dès ses débuts, vous participez à bâtir quelque chose de solide et bénéficiez d'un environnement propice à votre développement professionnel.</p>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="rejoindre-cta-block">
+          <div class="rcb-label">Offres & candidatures</div>
+          <div class="rcb-title">Rejoignez l'équipe fondatrice d'AC BTP</div>
+          <div class="rcb-text">Nos recrutements s'ouvriront au fur et à mesure du développement de l'activité. En attendant, toutes les candidatures spontanées sont étudiées avec attention.</div>
+          <div class="offres-list">
+            <div class="offre-item">
+              <div class="offre-item-top">
+                <div class="offre-name">Conseiller QSHE</div>
+                <div class="offre-tag">À venir</div>
+              </div>
+              <div class="offre-desc">Expérience en prévention des risques et management QSHE sur chantiers BTP.</div>
+            </div>
+            <div class="offre-item">
+              <div class="offre-item-top">
+                <div class="offre-name">Chargé d'opérations AMO</div>
+                <div class="offre-tag">À venir</div>
+              </div>
+              <div class="offre-desc">Profil ingénieur ou conducteur de travaux avec expérience en pilotage d'opérations.</div>
+            </div>
+          </div>
+          <div class="candidature-libre">
+            <strong>Candidature spontanée ouverte —</strong> Envoyez votre CV et lettre de motivation à <strong style="color:rgba(255,255,255,0.6)">recrutement@ac-btp.fr</strong> en précisant votre domaine d'expertise.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-layout">
+      <div>
+        <div class="s-label reveal">Parlons-en</div>
+        <h2 class="s-title reveal">Nous <span class="g">contacter</span></h2>
+        <p class="s-intro reveal">Un projet, une question, une candidature ? Nous vous répondons sous 24h ouvrées.</p>
+        <div class="contact-infos">
+          <div class="ci reveal">
+            <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.59 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div><div class="ci-label">Téléphone</div><div class="ci-val ci-placeholder">À renseigner</div></div>
+          </div>
+          <div class="ci reveal">
+            <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><div class="ci-label">Email</div><div class="ci-val ci-placeholder">À renseigner</div></div>
+          </div>
+          <div class="ci reveal">
+            <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><div class="ci-label">Zone d'intervention</div><div class="ci-val">Île-de-France & Grand Paris</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="contact-form-wrap">
+          <div class="form-row">
+            <div class="fg"><label>Prénom</label><input type="text" placeholder="Votre prénom"></div>
+            <div class="fg"><label>Nom</label><input type="text" placeholder="Votre nom"></div>
+          </div>
+          <div class="fg"><label>Email</label><input type="email" placeholder="votre@email.fr"></div>
+          <div class="fg"><label>Téléphone</label><input type="tel" placeholder="+33 6 XX XX XX XX"></div>
+          <div class="fg">
+            <label>Objet</label>
+            <select>
+              <option value="">Sélectionnez...</option>
+              <option>Mission QSHE</option>
+              <option>Assistance à Maîtrise d'Ouvrage</option>
+              <option>Candidature</option>
+              <option>Partenariat</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="fg"><label>Message</label><textarea placeholder="Décrivez votre projet ou votre demande..."></textarea></div>
+          <button class="btn-submit" id="submitBtn">Envoyer ma demande →</button>
+          <p class="form-note">Réponse garantie sous 24h ouvrées · Échange initial gratuit et sans engagement</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">AC<span>.</span>BTP</div>
+    <div class="footer-links">
+      <a href="#a-propos">À propos</a>
+      <a href="#nos-poles">Nos pôles</a>
+      <a href="#nos-realisations">Réalisations</a>
+      <a href="#nos-engagements">Engagements</a>
+      <a href="#nous-rejoindre">Recrutement</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-copy">© 2025 AC BTP — Tous droits réservés</div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  document.getElementById('submitBtn').addEventListener('click', function() {
+    this.textContent = '✓ Message envoyé !';
+    this.style.background = '#059669';
+    setTimeout(() => { this.textContent = 'Envoyer ma demande →'; this.style.background = ''; }, 3000);
+  });
+</script>
+</body>
+</html>
